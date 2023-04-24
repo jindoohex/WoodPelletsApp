@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>WoodPellet Web App</title>
+</head>
+<body>
+    <div id="app">
+
+        <header>
+            <!--Header-->
+        </header>
+
+
+        <main>
+            <div class="page-wrapper">
+              
+                  <div class="content-wrapper" style="margin: 15px 15px 15px 15px">
+                    <h5 v-if="errorMessage != null" style="color: red">{{errorMessage}}</h5>
+                    <br v-else>
+                    <h3 style="margin: 25px 0px 15px 0px">Create WoodPellet</h3>
+                    <div class="form-group" style="width: 400px;">
+                      <label>Brand</label>
+                    <input class="form-control" placeholder="Enter brand name" v-model="brand">
+                    </div>
+                    <div class="form-group" style="width: 400px;">
+                      <label>Price</label>
+                      <input class="form-control" placeholder="Enter price" v-model="price">
+                    </div>
+                    <div class="form-group" style="width: 400px;">
+                      <label>Quality</label>
+                      <input class="form-control" placeholder="Enter quality" v-model="quality">
+                    </div>
+                    <button class="btn btn-primary" v-on:click="postWoodPellet">Create Woodpellet</button>
+                    <br>
+                    <br>
+                    <br>
+
+                    <h3>Get Specific WoodPellet</h3>
+                    <div class="form-group" style="width: 400px;">
+                      <input class="form-control" placeholder="Enter ID of the WoodPellet" v-model="id">
+                    </div>
+                    <button class="btn btn-primary" v-on:click="getWoodPelletById(id)">Get WoodPellet</button>
+                    <br>
+                    <br>
+                    <br>
+
+                    <h3>WoodPellet List</h3>
+                    <button class="btn btn-primary" v-on:click="getAllWoodPellets">Get the list</button>
+                    <button class="btn btn-primary" v-on:click="clearCurrentList" style="margin: 10px">Clear the list</button>
+                    <table class="table" v-if="woodPelletList.length > 0">
+                      <br>
+                      <br>
+                      <thead class="thead-dark">
+                        <tr>
+                          <th scope="col" v-on:click="sortById"># ID</th>
+                          <th scope="col" v-on:click="sortByBrand">Brand</th>
+                          <th scope="col" v-on:click="sortByPrice">Price</th>
+                          <th scope="col" v-on:click="sortByQuality">Quality</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="woodPellet in woodPelletList">
+                          <th scope="row">{{woodPellet.id}}</th>
+                          <td>{{woodPellet.brand}}</td>
+                          <td>{{woodPellet.price}}</td>
+                          <td>{{woodPellet.quality}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+        </main>
+
+
+        <footer>
+            <!--Footer-->
+        </footer>
+        
+    </div>
+
+    <script src="js/index.js"></script>
+</body>
+</html>
